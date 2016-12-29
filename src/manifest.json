@@ -1,0 +1,28 @@
+{
+  "manifest_version": 2,
+  "name": "Średni wulkan",
+  "version": "0.1.0",
+
+  "description": "Oblicza średnią ocen w dzienniku Vulcan",
+  "icons": {
+    "16": "icon-16.png",
+    "48": "icon-48.png",
+    "128": "icon-128.png"
+  },
+
+  "browser_action": {
+    "default_icon": "icon-128.png",
+    "default_title": "Oblicz średnią"
+ },
+
+  "author": "mklkj",
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "homepage_url": "https://github.com/mklkj/medium-vulcan-chrome-extension",
+  "permissions": [
+     "https://uonetplus-opiekun.vulcan.net.pl/*/*/Oceny.mvc/Wszystkie"
+  ]
+}
