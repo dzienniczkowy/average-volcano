@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Średni wulkan",
-  "version": "0.1.1",
+  "version": "0.1.2",
 
   "description": "Oblicza średnią ocen w dzienniku Vulcan",
   "icons": {
@@ -21,7 +21,7 @@
       "background.js"
     ]
   },
-  "homepage_url": "https://github.com/mklkj/medium-vulcan",
+  "homepage_url": "https://github.com/mklkj/medium-volcano",
   "permissions": [
      "https://uonetplus-opiekun.vulcan.net.pl/"
   ]
