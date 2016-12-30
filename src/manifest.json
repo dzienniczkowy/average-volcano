@@ -21,7 +21,7 @@
       "background.js"
     ]
   },
-  "homepage_url": "https://github.com/mklkj/medium-vulcan-chrome-extension",
+  "homepage_url": "https://github.com/mklkj/medium-vulcan",
   "permissions": [
      "https://uonetplus-opiekun.vulcan.net.pl/"
   ]
