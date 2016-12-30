@@ -5,10 +5,10 @@
   var tableHeaderSelector = tableSelector + ' > thead > tr';
   var subjetsSelector = 'tbody tr';
   var ratingsSelector = 'td.break-word span';
-  var summaryContainerClass = 'whole-avarage';
+  var summaryContainerId = 'whole-avarage';
 
   (function(){
-    if(document.getElementById(summaryContainerClass)) {
+    if(document.getElementById(summaryContainerId) || document.querySelector(tableSelector) == null) {
       return;
     }
 
@@ -108,7 +108,7 @@
 
     th.innerHTML = Math.round(avg * 100) / 100;
     th.title = avg;
-    th.id = summaryContainerClass;
+    th.id = summaryContainerId;
 
     tr.appendChild(document.createElement('th'));
     tr.appendChild(document.createElement('th'));
