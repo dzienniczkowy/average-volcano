@@ -102,6 +102,8 @@
     var sum = avarages.reduce(function(a, b) { return a + b; });
     var avg = sum / avarages.length;
 
+    var thead = table.querySelector('thead tr');
+
     var tfoot = document.createElement('thead');
     var tr = document.createElement('tr');
     var th = document.createElement('th');
@@ -110,10 +112,12 @@
     th.title = avg;
     th.id = summaryContainerId;
 
-    tr.appendChild(document.createElement('th'));
-    tr.appendChild(document.createElement('th'));
-    tr.appendChild(document.createElement('th'));
-    tr.appendChild(document.createElement('th'));
+    var docFrag = document.createDocumentFragment();
+    for(var i = 0; i < thead.children.length - 1; i++) {
+      docFrag.appendChild(document.createElement('th'));
+    }
+    tr.appendChild(docFrag);
+
     tr.appendChild(th);
     tfoot.appendChild(tr);
     table.appendChild(tfoot)

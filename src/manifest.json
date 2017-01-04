@@ -23,6 +23,6 @@
   },
   "homepage_url": "https://github.com/mklkj/medium-volcano",
   "permissions": [
-     "https://uonetplus-opiekun.vulcan.net.pl/"
+     "https://*.vulcan.net.pl/"
   ]
 }
