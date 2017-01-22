@@ -10,10 +10,10 @@
     "128": "icon-128.png"
   },
 
-  "browser_action": {
-    "default_icon": "icon-128.png",
+  "page_action": {
+    "default_icon": "icon-48.png",
     "default_title": "Oblicz średnią"
- },
+  },
 
   "author": "mklkj",
   "background": {
@@ -23,6 +23,7 @@
   },
   "homepage_url": "https://github.com/mklkj/medium-volcano",
   "permissions": [
-     "https://*.vulcan.net.pl/"
+    "activeTab",
+    "tabs"
   ]
 }
