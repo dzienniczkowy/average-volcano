@@ -1,4 +1,5 @@
 build:src/manifest.json
-	zip -r medium-volcano.zip src/
+	rm -f medium-volcano.zip
+	zip -jr medium-volcano.zip src/
 
 PHONY: build
