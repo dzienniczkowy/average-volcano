@@ -41,8 +41,8 @@
       }
     }
 
-    if (denominator == 0) {
-      return 0;
+    if (0 == denominator) {
+      return null;
     }
 
     return counter / denominator;
@@ -51,10 +51,13 @@
   function putGradesAverageCellToSubjectRow(row, avarage) {
     var newNode = document.createElement('td');
 
-    var text = Math.round(avarage * 100) / 100;
-    if (text == 0) {
-      text = '-';
+    if (null == avarage) {
+      var text = '-';
+      avarage = '-';
+    } else {
+      var text = Math.round(avarage * 100) / 100;
     }
+
     newNode.innerHTML = text;
     newNode.title = avarage;
     row.appendChild(newNode)
@@ -99,8 +102,16 @@
   }
 
   function addWholeGradesAverageToTableFoot(table, avarages) {
-    var sum = avarages.reduce(function(a, b) { return a + b; });
-    var avg = sum / avarages.length;
+    // remove null values
+    avarages = avarages.filter(function(e){return e});
+
+    // round avarages
+    for (var i = 0, roundedAverages = Array(); i < avarages.length; i++) {
+      roundedAverages.push(Math.round(avarages[i]));
+    }
+
+    var sum = roundedAverages.reduce(function(a, b) { return a + b; });
+    var avg = sum / roundedAverages.length;
 
     var thead = table.querySelector('thead tr');
 
