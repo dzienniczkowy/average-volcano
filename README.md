@@ -4,8 +4,8 @@ Medium volcano is a browser extension which calculates weighted average at VULCA
 
 ## Installation
 
-- [Mozilla Firefox](https://addons.mozilla.org/pl/firefox/addon/medium-volcano/)
-- [Opera](https://addons.opera.com/pl/extensions/details/medium-volcano/)
+- [Mozilla Firefox](https://addons.mozilla.org/firefox/addon/medium-volcano/)
+- [Opera](https://addons.opera.com/extensions/details/medium-volcano/)
 
 ## Usage
 
