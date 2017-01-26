@@ -59,7 +59,7 @@
       var text = Math.round(avarage * 100) / 100;
     }
 
-    newNode.innerHTML = text;
+    newNode.textContent = text;
     newNode.title = avarage;
     row.appendChild(newNode)
 
@@ -96,7 +96,7 @@
 
   function addHeaderCellToTable(header) {
     var newNode = document.createElement('th');
-    newNode.innerHTML = 'Obliczona średnia';
+    newNode.textContent = 'Obliczona średnia';
     header.appendChild(newNode);
   }
 
@@ -135,10 +135,10 @@
     var th = document.createElement('th');
 
     if (!isNaN(avg)) {
-      th.innerHTML = Math.round(avg * 100) / 100;
+      th.textContent = Math.round(avg * 100) / 100;
       th.title = avg;
     } else {
-      th.innerHTML = '-';
+      th.textContent = '-';
     }
     th.id = summaryContainerId;
 
@@ -170,10 +170,10 @@
     var cell = table.querySelector('thead:last-of-type th:nth-last-child(2)');
     var avg = calculateAverage(averages);
     if (!isNaN(avg)) {
-      cell.innerHTML = Math.round(avg * 100) / 100;
+      cell.textContent = Math.round(avg * 100) / 100;
       cell.title = avg;
     } else {
-      cell.innerHTML = '-';
+      cell.textContent = '-';
     }
   }
 
