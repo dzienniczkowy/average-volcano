@@ -1,0 +1,14 @@
+{
+  "extensionName": {
+    "message": "Średni wulkan",
+    "description": "Nazwa rozszerzenia."
+  },
+  "extensionDescription": {
+    "message": "Oblicza średnią ocen w dzienniku Vulcan.",
+    "description": "Opis rozszerzenia."
+  },
+  "iconTooltip": {
+    "message": "Oblicz średnią",
+    "description": "Dymek przycisku."
+  }
+}

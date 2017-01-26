@@ -1,0 +1,14 @@
+{
+  "extensionName": {
+    "message": "Medium volcano",
+    "description": "Name of the extension."
+  },
+  "extensionDescription": {
+    "message": "Calculate the weighted average in a VULCAN log.",
+    "description": "Description of the extension."
+  },
+  "iconTooltip": {
+    "message": "Calculate average",
+    "description": "Icon tooltip."
+  }
+}

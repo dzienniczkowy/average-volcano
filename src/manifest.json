@@ -1,27 +1,25 @@
 {
   "manifest_version": 2,
-  "name": "Średni wulkan",
+  "name": "__MSG_extensionName__",
+  "description": "__MSG_extensionDescription__",
   "version": "0.3.0",
+  "author": "mklkj",
+  "homepage_url": "https://github.com/mklkj/medium-volcano",
+  "default_locale": "en",
 
-  "description": "Oblicza średnią ocen w dzienniku Vulcan",
   "icons": {
     "16": "icon-16.png",
     "48": "icon-48.png",
     "128": "icon-128.png"
   },
-
+  "background": {
+    "scripts": ["background.js"]
+  },
   "page_action": {
     "default_icon": "icon-48.png",
-    "default_title": "Oblicz średnią"
+    "default_title": "__MSG_iconTooltip__"
   },
 
-  "author": "mklkj",
-  "background": {
-    "scripts": [
-      "background.js"
-    ]
-  },
-  "homepage_url": "https://github.com/mklkj/medium-volcano",
   "permissions": [
     "activeTab",
     "tabs"
