@@ -21,9 +21,8 @@
       averages.push(avarage);
     }
 
-    addHeaderCellToTable(document.querySelector(tableHeaderSelector));
-    addWholeGradesAverageToTableFoot(document.querySelector(tableSelector), averages);
-    calculateAndAddRealWholeGradesAverageToTableFoot(document.querySelector(tableSelector));
+    addWholeGradesAverageToTableFoot(averages);
+    calculateAndAddRealWholeGradesAverageToTableFoot();
   })();
 
   function getGradesAverage(row) {
@@ -33,7 +32,7 @@
     var denominator = 0;
 
     for (var i = 0, max = ratings.length; i < max; i++) {
-      var weight = getWeightOfGrade(ratings[i]);
+      var weight = getWeightOfGradeFromAlt(ratings[i]);
       var value = getRatingValue(ratings[i].innerHTML);
 
       if (value) {
@@ -50,8 +49,6 @@
   }
 
   function putGradesAverageCellToSubjectRow(row, avarage) {
-    var newNode = document.createElement('td');
-
     if (null == avarage) {
       var text = '-';
       avarage = '-';
@@ -59,14 +56,18 @@
       var text = Math.round(avarage * 100) / 100;
     }
 
+    var newNode = document.createElement('td');
     newNode.textContent = text;
     newNode.title = avarage;
     row.appendChild(newNode)
-
-    return avarage;
   }
 
-  function getWeightOfGrade(span) {
+  /**
+   * Extract weight of grade from span alt.
+   * @param  {Object} span Span
+   * @return {Number} Grade weight
+   */
+  function getWeightOfGradeFromAlt(span) {
     var alt = span.getAttribute('alt');
     var weight = alt.match(/[0-9]{1,2},[0-9]{2}/)[0];
     var weight = parseFloat(weight.replace(/,/, '.'));
@@ -74,10 +75,20 @@
     return weight;
   }
 
+  /**
+   * Check is rating value valid.
+   * @param  {*}  rating Rating value
+   * @return {Boolean}
+   */
   function isRatingValueValid(rating) {
     return /^(\+|\-)?[0-6](\+|\-)?$/.test(rating);
   }
 
+  /**
+   * Get real rating value.
+   * @param  {*} rating Rating
+   * @return {Number}
+   */
   function getRatingValue(rating) {
     if (!isRatingValueValid(rating)) {
       return false;
@@ -94,15 +105,25 @@
     return rating;
   }
 
-  function addHeaderCellToTable(header) {
+  /**
+   * Add header cell to table.
+   * @param {String} text Cell text content
+   */
+  function addHeaderCellToTable(text) {
+    var header = document.querySelector(tableHeaderSelector);
     var newNode = document.createElement('th');
-    newNode.textContent = 'Obliczona średnia';
+    newNode.textContent = text;
     header.appendChild(newNode);
   }
 
+  /**
+   * Calculate average from array values.
+   * @param  {Array} averages
+   * @return {Number}
+   */
   function calculateAverage(averages) {
     // remove null values
-    averages = averages.filter(function(e){return e});
+    averages = averages.filter(function(e){ return e });
 
     // round averages
     for (var i = 0, roundedAverages = Array(); i < averages.length; i++) {
@@ -119,21 +140,27 @@
       return NaN;
     }
 
-    var sum = roundedAverages.reduce(function(a, b) { return a + b; });
+    var sum = roundedAverages.reduce(function(a, b) { return a + b });
     var avg = sum / roundedAverages.length;
 
     return avg;
   }
 
-  function addWholeGradesAverageToTableFoot(table, averages) {
-    var avg = calculateAverage(averages);
+  /**
+   * Add whole grades average to table foot.
+   * @param {Array} averages Average grades
+   */
+  function addWholeGradesAverageToTableFoot(averages) {
+    addHeaderCellToTable('Obliczona średnia');
 
+    var table = document.querySelector(tableSelector);
     var thead = table.querySelector('thead tr');
 
     var tfoot = document.createElement('thead');
     var tr = document.createElement('tr');
     var th = document.createElement('th');
 
+    var avg = calculateAverage(averages);
     if (!isNaN(avg)) {
       th.textContent = Math.round(avg * 100) / 100;
       th.title = avg;
@@ -143,7 +170,7 @@
     th.id = summaryContainerId;
 
     var docFrag = document.createDocumentFragment();
-    for(var i = 0; i < thead.children.length - 1; i++) {
+    for (var i = 0; i < thead.children.length - 1; i++) {
       docFrag.appendChild(document.createElement('th'));
     }
     tr.appendChild(docFrag);
@@ -153,22 +180,24 @@
     table.appendChild(tfoot)
   }
 
-  function calculateAndAddRealWholeGradesAverageToTableFoot(table) {
-    // get subjects rows
+  function calculateAndAddRealWholeGradesAverageToTableFoot() {
+    // get subject rows
     var subjects = document.querySelectorAll(subjetsSelector);
     var averages = [];
 
-    // iterate over each sbuject
+    // iterate over each subject
     for (var i = 0, max = subjects.length; i < max; i++) {
       // check is any grades exists
-      if (getGradesAverage(subjects[i])) {
+      if (subjects[i].querySelector(ratingsSelector)) {
         var average = subjects[i].querySelector('td:nth-last-child(2)').innerHTML;
-        averages.push(changeWordRatingToNumber(average));
+        averages.push(normalizeRating(average));
       }
     }
 
+    var table = document.querySelector(tableSelector);
     var cell = table.querySelector('thead:last-of-type th:nth-last-child(2)');
     var avg = calculateAverage(averages);
+
     if (!isNaN(avg)) {
       cell.textContent = Math.round(avg * 100) / 100;
       cell.title = avg;
@@ -177,7 +206,12 @@
     }
   }
 
-  function changeWordRatingToNumber(rating) {
+  /**
+   * Normalize rating value.
+   * @param  {Number|String} rating Rating value
+   * @return {Number} Rating number value
+   */
+  function normalizeRating(rating) {
     if (isRatingValueValid(rating)) {
       return getRatingValue(rating);
     }
@@ -189,6 +223,7 @@
       case 'dostateczny': rating = 3; break;
       case 'dopuszczający': rating = 2; break;
       case 'niedostateczny': rating = 1; break;
+      default: rating = 0;
     }
 
     return rating;
