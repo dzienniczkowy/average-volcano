@@ -1,39 +1,86 @@
 (function(){
   "use strict";
 
-  var tableSelector = '.ocenyZwykle-table';
-  var tableHeaderSelector = tableSelector + ' > thead > tr';
+  var tableDefaultSelector = '.ocenyZwykle-table';
+  var tableDetailsSelector = '.ocenySzczegoly-table';
+  var tableHeaderSelector = tableDefaultSelector + ' > thead > tr';
   var subjetsSelector = 'tbody tr';
   var ratingsSelector = 'td.break-word span';
+  var gradesSelector = 'tbody tr'
   var summaryContainerId = 'whole-avarage';
 
   (function(){
-    if(document.getElementById(summaryContainerId) || document.querySelector(tableSelector) == null) {
+    if(document.getElementById(summaryContainerId)) {
       return;
     }
 
-    var subjects = document.querySelectorAll(subjetsSelector);
-    var averages = [];
+    if (document.querySelector(tableDefaultSelector)) {
+      var subjects = document.querySelectorAll(subjetsSelector);
+      var averages = [];
 
-    for (var i = 0, max = subjects.length; i < max; i++) {
-      var avarage = getGradesAverage(subjects[i]);
-      putGradesAverageCellToSubjectRow(subjects[i], avarage);
-      averages.push(avarage);
+      for (var i = 0, max = subjects.length; i < max; i++) {
+        var avarage = getGradesAverage(subjects[i]);
+        putGradesAverageCellToSubjectRow(subjects[i], avarage);
+        averages.push(avarage);
+      }
+
+      addWholeGradesAverageToTableFoot(averages);
+      calculateAndAddRealWholeGradesAverageToTableFoot();
+
+    } else if(document.querySelector(tableDetailsSelector)) {
+      var grades = document.querySelectorAll(gradesSelector);
+
+      var weightedAverage = calculateAverageFromGrades(grades);
+      addWeightedAverageToTableFoot(weightedAverage);
     }
-
-    addWholeGradesAverageToTableFoot(averages);
-    calculateAndAddRealWholeGradesAverageToTableFoot();
   })();
 
+  function calculateAverageFromGrades(grades) {
+    var counter = 0;
+    var denominator = 0;
+
+    for (let i = 0; i < grades.length; i++) {
+      let grade = getGradeValue(grades[i]);
+
+      if (grade.value) {
+        counter += grade.value * grade.weight;
+        denominator += grade.weight;
+      }
+    }
+
+    if (0 == denominator) {
+      return null;
+    }
+
+    return counter / denominator;
+  }
+
+  function getGradeValue(gradeRow) {
+    let value = gradeRow.querySelector('td:nth-child(2)').textContent;
+    let weight = gradeRow.querySelector('td:nth-child(4)').textContent;
+
+    value = getRatingValue(value);
+    weight = parseFloat(weight.replace(/,/, '.'));
+
+    if (value) {
+      return {
+        "value": value,
+        "weight": weight
+      };
+    }
+
+    return false;
+  }
+
   function getGradesAverage(row) {
-    var ratings = row.querySelectorAll(ratingsSelector);
+    var grades = row.querySelectorAll(ratingsSelector);
 
     var counter = 0;
     var denominator = 0;
 
-    for (var i = 0, max = ratings.length; i < max; i++) {
-      var weight = getWeightOfGradeFromAlt(ratings[i]);
-      var value = getRatingValue(ratings[i].innerHTML);
+    for (var i = 0, max = grades.length; i < max; i++) {
+      var value = getRatingValue(grades[i].innerHTML);
+      var weight = getWeightOfGradeFromAlt(grades[i]);
 
       if (value) {
         counter += value * weight;
@@ -122,6 +169,7 @@
    * @return {Number}
    */
   function calculateAverage(averages) {
+    console.log(averages);
     // remove null values
     averages = averages.filter(function(e){ return e });
 
@@ -153,7 +201,7 @@
   function addWholeGradesAverageToTableFoot(averages) {
     addHeaderCellToTable('Obliczona średnia');
 
-    var table = document.querySelector(tableSelector);
+    var table = document.querySelector(tableDefaultSelector);
     var thead = table.querySelector('thead tr');
 
     var tfoot = document.createElement('thead');
@@ -194,7 +242,7 @@
       }
     }
 
-    var table = document.querySelector(tableSelector);
+    var table = document.querySelector(tableDefaultSelector);
     var cell = table.querySelector('thead:last-of-type th:nth-last-child(2)');
     var avg = calculateAverage(averages);
 
@@ -204,6 +252,35 @@
     } else {
       cell.textContent = '-';
     }
+  }
+
+  function addWeightedAverageToTableFoot(average) {
+    var table = document.querySelector(tableDetailsSelector);
+    var thead = table.querySelector('thead tr');
+    var tfoot = document.createElement('thead');
+    var tr = document.createElement('tr');
+    var th = document.createElement('th');
+
+    if (!isNaN(average)) {
+      th.textContent = Math.round(average * 100) / 100;
+      th.title = average;
+    } else {
+      th.textContent = '-';
+    }
+    th.id = summaryContainerId;
+
+    var docFrag = document.createDocumentFragment();
+    for (var i = 0; i < thead.children.length; i++) {
+      if (i == 1) {
+        docFrag.appendChild(th);
+      } else {
+        docFrag.appendChild(document.createElement('th'));
+      }
+    }
+    tr.appendChild(docFrag);
+
+    tfoot.appendChild(tr);
+    table.appendChild(tfoot);
   }
 
   /**
