@@ -169,7 +169,6 @@
    * @return {Number}
    */
   function calculateAverage(averages) {
-    console.log(averages);
     // remove null values
     averages = averages.filter(function(e){ return e });
 
