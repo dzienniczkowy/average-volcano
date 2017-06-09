@@ -116,7 +116,10 @@
    */
   function getWeightOfGradeFromAlt(span) {
     var alt = span.getAttribute('alt');
-    var weight = alt.match(/[0-9]{1,2},[0-9]{2}/)[0];
+
+    var weightText = alt.match(/Waga:\s[0-9]{1,2},[0-9]{2}/)[0];
+
+    var weight = weightText.match(/[0-9]{1,2},[0-9]{2}/)[0];
     var weight = parseFloat(weight.replace(/,/, '.'));
 
     return weight;
