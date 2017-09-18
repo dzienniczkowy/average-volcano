@@ -1,5 +1,9 @@
 # Medium volcano
 
+[![Mozilla Add-on](https://img.shields.io/amo/users/medium-volcano.svg?style=flat-square)](https://addons.mozilla.org/firefox/addon/medium-volcano/)
+[![Mozilla Add-on](https://img.shields.io/amo/stars/medium-volcano.svg?style=flat-square)](https://addons.mozilla.org/firefox/addon/medium-volcano/)
+[![Mozilla Add-on](https://img.shields.io/amo/v/medium-volcano.svg?style=flat-square)](https://addons.mozilla.org/firefox/addon/medium-volcano/)
+
 Medium volcano is a browser extension which calculates weighted average at VULCAN log.
 
 ## Installation
