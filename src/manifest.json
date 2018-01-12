@@ -29,7 +29,7 @@
   },
   "page_action": {
     "default_icon": "icon-48.png",
-    "default_title": "__MSG_iconTooltip__"
+    "default_title": "__MSG_extensionName__"
   },
 
   "permissions": [
