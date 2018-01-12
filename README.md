@@ -13,8 +13,7 @@
 
 ## Użycie
 
-Zaloguj się na do dziennika VULCAN, przejdź do `Uczeń` → `Oceny`.
-W prawej części paska adresu powinna pojawić się ikona Średniego wulkana – kliknij na nią – twoja średnia została policzona!
+Po prostu zaloguj się do dziennika i sprawdź swoje oceny - twoja średnia będzie już policzona!
 
 ## Licencja
 

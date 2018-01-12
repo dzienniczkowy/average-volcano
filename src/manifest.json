@@ -12,6 +12,18 @@
     "48": "icon-48.png",
     "128": "icon-128.png"
   },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://uonetplus-opiekun.vulcan.net.pl/*/*/Oceny*/Wszystkie*",
+        "*://uonetplus-opiekun.fakelog.cf/*/*/Oceny.mvc/Wszystkie*"
+      ],
+      "js": [
+        "bookmarklet.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
   "background": {
     "scripts": ["background.js"]
   },
