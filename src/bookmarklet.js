@@ -1,13 +1,13 @@
-(function(){
+(function() {
   "use strict";
 
-  var tableDefaultSelector = '.ocenyZwykle-table';
-  var tableDetailsSelector = '.ocenySzczegoly-table';
-  var tableHeaderSelector = tableDefaultSelector + ' > thead > tr';
-  var subjetsSelector = 'tbody tr';
-  var ratingsSelector = 'td.break-word span';
-  var gradesSelector = 'tbody tr'
-  var summaryContainerId = 'whole-avarage';
+  const tableDefaultSelector = '.ocenyZwykle-table';
+  const tableDetailsSelector = '.ocenySzczegoly-table';
+  const tableHeaderSelector = tableDefaultSelector + ' > thead > tr';
+  const subjectsSelector = 'tbody tr';
+  const ratingsSelector = 'td.break-word span';
+  const gradesSelector = 'tbody tr';
+  const summaryContainerId = 'whole-avarage';
 
   (function(){
     if(document.getElementById(summaryContainerId)) {
@@ -15,29 +15,28 @@
     }
 
     if (document.querySelector(tableDefaultSelector)) {
-      var subjects = document.querySelectorAll(subjetsSelector);
-      var averages = [];
+      const subjects = document.querySelectorAll(subjectsSelector);
+      const averages = [];
 
-      for (var i = 0, max = subjects.length; i < max; i++) {
-        var avarage = getGradesAverage(subjects[i]);
-        putGradesAverageCellToSubjectRow(subjects[i], avarage);
-        averages.push(avarage);
+      for (let i = 0, max = subjects.length; i < max; i++) {
+        let average = getGradesAverage(subjects[i]);
+        putGradesAverageCellToSubjectRow(subjects[i], average);
+        averages.push(average);
       }
 
       addWholeGradesAverageToTableFoot(averages);
       calculateAndAddRealWholeGradesAverageToTableFoot();
 
     } else if(document.querySelector(tableDetailsSelector)) {
-      var grades = document.querySelectorAll(gradesSelector);
-
-      var weightedAverage = calculateAverageFromGrades(grades);
+      let grades = document.querySelectorAll(gradesSelector);
+      let weightedAverage = calculateAverageFromGrades(grades);
       addWeightedAverageToTableFoot(weightedAverage);
     }
   })();
 
   function calculateAverageFromGrades(grades) {
-    var counter = 0;
-    var denominator = 0;
+    let counter = 0;
+    let denominator = 0;
 
     for (let i = 0; i < grades.length; i++) {
       let grade = getGradeValue(grades[i]);
@@ -48,7 +47,7 @@
       }
     }
 
-    if (0 == denominator) {
+    if (0 === denominator) {
       return null;
     }
 
@@ -73,14 +72,14 @@
   }
 
   function getGradesAverage(row) {
-    var grades = row.querySelectorAll(ratingsSelector);
+    const grades = row.querySelectorAll(ratingsSelector);
 
-    var counter = 0;
-    var denominator = 0;
+    let counter = 0;
+    let denominator = 0;
 
-    for (var i = 0, max = grades.length; i < max; i++) {
-      var value = getRatingValue(grades[i].innerHTML);
-      var weight = getWeightOfGradeFromAlt(grades[i]);
+    for (let i = 0, max = grades.length; i < max; i++) {
+      const value = getRatingValue(grades[i].innerHTML);
+      const weight = getWeightOfGradeFromAlt(grades[i]);
 
       if (value) {
         counter += value * weight;
@@ -88,24 +87,25 @@
       }
     }
 
-    if (0 == denominator) {
+    if (0 === denominator) {
       return null;
     }
 
     return counter / denominator;
   }
 
-  function putGradesAverageCellToSubjectRow(row, avarage) {
-    if (null == avarage) {
-      var text = '-';
-      avarage = '-';
+  function putGradesAverageCellToSubjectRow(row, average) {
+    let text;
+    if (null == average) {
+      text = '-';
+      average = '-';
     } else {
-      var text = Math.round(avarage * 100) / 100;
+      text = Math.round(average * 100) / 100;
     }
 
-    var newNode = document.createElement('td');
+    const newNode = document.createElement('td');
     newNode.textContent = text;
-    newNode.title = avarage;
+    newNode.title = average;
     row.appendChild(newNode)
   }
 
@@ -115,14 +115,13 @@
    * @return {Number} Grade weight
    */
   function getWeightOfGradeFromAlt(span) {
-    var alt = span.getAttribute('alt');
+    const alt = span.getAttribute('alt');
 
-    var weightText = alt.match(/Waga:\s[0-9]{1,2},[0-9]{2}/)[0];
+    const weightText = alt.match(/Waga:\s[0-9]{1,2},[0-9]{2}/)[0];
 
-    var weight = weightText.match(/[0-9]{1,2},[0-9]{2}/)[0];
-    var weight = parseFloat(weight.replace(/,/, '.'));
+    let weight = weightText.match(/[0-9]{1,2},[0-9]{2}/)[0];
 
-    return weight;
+    return parseFloat(weight.replace(/,/, '.'));
   }
 
   /**
@@ -131,13 +130,13 @@
    * @return {Boolean}
    */
   function isRatingValueValid(rating) {
-    return /^(\+|\-)?[0-6](\+|\-)?$/.test(rating);
+    return /^([+-])?[0-6]([+-])?$/.test(rating);
   }
 
   /**
    * Get real rating value.
    * @param  {*} rating Rating
-   * @return {Number}
+   * @return {Number|Boolean}
    */
   function getRatingValue(rating) {
     if (!isRatingValueValid(rating)) {
@@ -148,7 +147,7 @@
       return parseInt(rating) + 0.25;
     }
 
-    if (/^(\-)[0-6]$/.test(rating) || /^[0-6](\-)$/.test(rating)) {
+    if (/^(-)[0-6]$/.test(rating) || /^[0-6](-)$/.test(rating)) {
       return parseInt(rating) - 0.25;
     }
 
@@ -160,8 +159,8 @@
    * @param {String} text Cell text content
    */
   function addHeaderCellToTable(text) {
-    var header = document.querySelector(tableHeaderSelector);
-    var newNode = document.createElement('th');
+    const header = document.querySelector(tableHeaderSelector);
+    const newNode = document.createElement('th');
     newNode.textContent = text;
     header.appendChild(newNode);
   }
@@ -173,11 +172,12 @@
    */
   function calculateAverage(averages) {
     // remove null values
-    averages = averages.filter(function(e){ return e });
+    averages = averages.filter(e => { return e });
 
     // round averages
-    for (var i = 0, roundedAverages = Array(); i < averages.length; i++) {
-      var rounded = Math.round(averages[i]);
+    const roundedAverages = [];
+    for (let i = 0; i < averages.length; i++) {
+      const rounded = Math.round(averages[i]);
 
       // with this check, average be calculating even when doesn't have all ratings
       if (!isNaN(rounded)) {
@@ -186,14 +186,13 @@
     }
 
     // if array no contains any average, nothing shows
-    if (roundedAverages.length == 0) {
+    if (0 === roundedAverages.length) {
       return NaN;
     }
 
-    var sum = roundedAverages.reduce(function(a, b) { return a + b });
-    var avg = sum / roundedAverages.length;
+    const sum = roundedAverages.reduce((a, b) => { return a + b });
 
-    return avg;
+    return sum / roundedAverages.length;
   }
 
   /**
@@ -203,24 +202,24 @@
   function addWholeGradesAverageToTableFoot(averages) {
     addHeaderCellToTable('Obliczona średnia');
 
-    var table = document.querySelector(tableDefaultSelector);
-    var thead = table.querySelector('thead tr');
+    const table = document.querySelector(tableDefaultSelector);
+    const thead = table.querySelector('thead tr');
 
-    var tfoot = document.createElement('thead');
-    var tr = document.createElement('tr');
-    var th = document.createElement('th');
+    const tfoot = document.createElement('thead');
+    const tr = document.createElement('tr');
+    const th = document.createElement('th');
 
-    var avg = calculateAverage(averages);
+    const avg = calculateAverage(averages);
     if (!isNaN(avg)) {
-      th.textContent = Math.round(avg * 100) / 100;
-      th.title = avg;
+      th.textContent = avg.toFixed(2);
+      th.title = avg.toString();
     } else {
       th.textContent = '-';
     }
     th.id = summaryContainerId;
 
-    var docFrag = document.createDocumentFragment();
-    for (var i = 0; i < thead.children.length - 1; i++) {
+    const docFrag = document.createDocumentFragment();
+    for (let i = 0; i < thead.children.length - 1; i++) {
       docFrag.appendChild(document.createElement('th'));
     }
     tr.appendChild(docFrag);
@@ -232,24 +231,24 @@
 
   function calculateAndAddRealWholeGradesAverageToTableFoot() {
     // get subject rows
-    var subjects = document.querySelectorAll(subjetsSelector);
-    var averages = [];
+    const subjects = document.querySelectorAll(subjectsSelector);
+    const averages = [];
 
     // iterate over each subject
-    for (var i = 0, max = subjects.length; i < max; i++) {
+    for (let i = 0, max = subjects.length; i < max; i++) {
       // check is any grades exists
       if (subjects[i].querySelector(ratingsSelector)) {
-        var average = subjects[i].querySelector('td:nth-last-child(2)').innerHTML;
+        let average = subjects[i].querySelector('td:nth-last-child(2)').innerHTML;
         averages.push(normalizeRating(average));
       }
     }
 
-    var table = document.querySelector(tableDefaultSelector);
-    var cell = table.querySelector('thead:last-of-type th:nth-last-child(2)');
-    var avg = calculateAverage(averages);
+    const table = document.querySelector(tableDefaultSelector);
+    const cell = table.querySelector('thead:last-of-type th:nth-last-child(2)');
+    const avg = calculateAverage(averages);
 
     if (!isNaN(avg)) {
-      cell.textContent = Math.round(avg * 100) / 100;
+      cell.textContent = avg.toFixed(2);
       cell.title = avg;
     } else {
       cell.textContent = '-';
@@ -257,23 +256,23 @@
   }
 
   function addWeightedAverageToTableFoot(average) {
-    var table = document.querySelector(tableDetailsSelector);
-    var thead = table.querySelector('thead tr');
-    var tfoot = document.createElement('thead');
-    var tr = document.createElement('tr');
-    var th = document.createElement('th');
+    const table = document.querySelector(tableDetailsSelector);
+    const thead = table.querySelector('thead tr');
+    const tfoot = document.createElement('thead');
+    const tr = document.createElement('tr');
+    const th = document.createElement('th');
 
     if (!isNaN(average)) {
-      th.textContent = Math.round(average * 100) / 100;
+      th.textContent = average.toFixed(2);
       th.title = average;
     } else {
       th.textContent = '-';
     }
     th.id = summaryContainerId;
 
-    var docFrag = document.createDocumentFragment();
-    for (var i = 0; i < thead.children.length; i++) {
-      if (i == 1) {
+    const docFrag = document.createDocumentFragment();
+    for (let i = 0; i < thead.children.length; i++) {
+      if (1 === i) {
         docFrag.appendChild(th);
       } else {
         docFrag.appendChild(document.createElement('th'));
