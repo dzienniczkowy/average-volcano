@@ -144,11 +144,11 @@
     }
 
     if (/^(\+)[0-6]$/.test(rating) || /^[0-6](\+)$/.test(rating)) {
-      return parseInt(rating) + 0.25;
+      return parseInt(rating) + 0.33;
     }
 
     if (/^(-)[0-6]$/.test(rating) || /^[0-6](-)$/.test(rating)) {
-      return parseInt(rating) - 0.25;
+      return parseInt(rating) - 0.33;
     }
 
     return rating;
