@@ -4,7 +4,36 @@ function insertAfter(el, referenceNode) {
   referenceNode.parentNode.insertBefore(el, referenceNode.nextSibling);
 }
 
-(function(){
+function addKeyEvents() {
+  Array.from(document.querySelectorAll(tableDefaultSelector + " span")).forEach(el => {
+    el.contentEditable = true;
+    el.addEventListener("keydown", evt => {
+      if (!((evt.key > 0 && evt.key < 6) || evt.key === '+' || evt.key === '-' || evt.key === 'Backspace'
+          || evt.key === 'Delete')) {
+        evt.preventDefault();
+      }
+      let number = parseInt(evt.target.innerHTML);
+      if (isNaN(number)) {
+        number = 1;
+      }
+      if (evt.key === "ArrowUp" && number !== 6) {
+        evt.target.textContent = (number + 1).toString();
+      }
+      if (evt.key === "ArrowDown" && number !== 1) {
+        evt.target.textContent = (number - 1).toString();
+      }
+      if (evt.key === "ArrowLeft") {
+        evt.target.previousElementSibling.focus();
+      }
+      if (evt.key === "ArrowRight") {
+        evt.target.nextElementSibling.focus();
+      }
+      calculateSubjectsAverage();
+    });
+  });
+}
+
+function addCellsToTable() {
   if (document.querySelector(tableDefaultSelector) && !document.querySelector('.medium-volcano')) {
     const headerCell = document.createElement("th");
     headerCell.textContent = "Średnia";
@@ -30,7 +59,7 @@ function insertAfter(el, referenceNode) {
     footer.appendChild(tr);
     insertAfter(footer, document.querySelector(tableDefaultSelector + " tbody"));
   }
-})();
+}
 
 /**
  * Check is rating value valid.
@@ -185,12 +214,13 @@ function calculateRealAverage(cellFromEnd) {
   }
 }
 
+addCellsToTable();
 calculateSubjectsAverage();
 calculateRealAverage(1);
 calculateRealAverage(2);
+addKeyEvents();
 
-const observer = new MutationObserver(mutation => {
-  console.log(mutation);
+const observer = new MutationObserver(() => {
   calculateSubjectsAverage();
   calculateRealAverage(1);
   calculateRealAverage(2);
