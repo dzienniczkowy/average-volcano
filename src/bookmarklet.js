@@ -229,5 +229,6 @@ const observer = new MutationObserver(() => {
 observer.observe(document.querySelector(tableDefaultSelector), {
   subtree: true
   , characterData: true
-  // , attributes: true
+  , attributes: true
+  , attributeFilter: ['alt']
 });
