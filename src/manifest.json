@@ -3,9 +3,9 @@
   "name": "__MSG_extensionName__",
   "description": "__MSG_extensionDescription__",
   "version": "0.8.0",
-  "author": "mklkj",
-  "homepage_url": "https://github.com/mklkj/medium-volcano",
-  "default_locale": "en",
+  "author": "wulkanowy",
+  "homepage_url": "https://github.com/wulkanowy/medium-volcano",
+  "default_locale": "pl",
 
   "icons": {
     "16": "icon-16.png",
@@ -16,6 +16,10 @@
     {
       "matches": [
         "*://uonetplus-opiekun.vulcan.net.pl/*/*/Oceny*/Wszystkie*",
+        "*://uonetplus-opiekun.eszkola.opolskie.pl/*/*/Oceny*/Wszystkie*",
+        "*://uonetplus-opiekun.edu.gdansk.pl/*/*/Oceny*/Wszystkie*",
+        "*://uonetplus-opiekun.umt.tarnow.pl/*/*/Oceny*/Wszystkie*",
+        "*://uonetplus-opiekun.resman.pl/*/*/Oceny*/Wszystkie*",
         "*://uonetplus-opiekun.fakelog.cf/*/*/Oceny.mvc/Wszystkie*"
       ],
       "js": [
