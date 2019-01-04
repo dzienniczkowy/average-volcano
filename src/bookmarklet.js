@@ -1,4 +1,5 @@
 const tableDefaultSelector = '.ocenyZwykle-table';
+const tableDefaultSelector = '.ocenyZwykle-table';
 
 function insertAfter(el, referenceNode) {
   referenceNode.parentNode.insertBefore(el, referenceNode.nextSibling);
@@ -34,7 +35,7 @@ function addKeyEvents() {
 }
 
 function addCellsToTable() {
-  if (document.querySelector(tableDefaultSelector) && !document.querySelector('.medium-volcano')) {
+  if (document.querySelector(tableDefaultSelector) && !document.querySelector('.average-volcano')) {
     const headerCell = document.createElement("th");
     headerCell.textContent = "Średnia";
     insertAfter(headerCell, document.querySelector(tableDefaultSelector + ' thead th:nth-child(2)'));
@@ -46,7 +47,7 @@ function addCellsToTable() {
     });
 
     const footer = document.createElement("thead");
-    footer.classList.add("medium-volcano");
+    footer.classList.add("average-volcano");
     const tr = document.createElement("tr");
     const docFrag = document.createDocumentFragment();
     for (let i = 0; i < document.querySelector(tableDefaultSelector + " thead tr").children.length; i++) {

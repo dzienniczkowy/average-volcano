@@ -1,16 +1,16 @@
-# Medium volcano – średni wulkan
+# Average volcano – średni wulkan
 
-[![Mozilla Add-on](https://img.shields.io/amo/users/medium-volcano.svg?style=flat-square)](https://addons.mozilla.org/firefox/addon/medium-volcano/)
-[![Mozilla Add-on](https://img.shields.io/amo/stars/medium-volcano.svg?style=flat-square)](https://addons.mozilla.org/firefox/addon/medium-volcano/)
-[![Mozilla Add-on](https://img.shields.io/amo/v/medium-volcano.svg?style=flat-square)](https://addons.mozilla.org/firefox/addon/medium-volcano/)
+[![Mozilla Add-on](https://img.shields.io/amo/users/average-volcano.svg?style=flat-square)](https://addons.mozilla.org/firefox/addon/average-volcano/)
+[![Mozilla Add-on](https://img.shields.io/amo/stars/average-volcano.svg?style=flat-square)](https://addons.mozilla.org/firefox/addon/average-volcano/)
+[![Mozilla Add-on](https://img.shields.io/amo/v/average-volcano.svg?style=flat-square)](https://addons.mozilla.org/firefox/addon/average-volcano/)
 [![Chrome Web Store](https://img.shields.io/chrome-web-store/v/oakogdgghkdcianmmiplppcmllelhlbh.svg?style=flat-square)](https://chrome.google.com/webstore/detail/%C5%9Bredni-wulkan/oakogdgghkdcianmmiplppcmllelhlbh)
 
 Średni wulkan to rozszerzenie do przeglądarki, które oblicza średnią ważoną w dzienniku VULCANa.
 
 ## Instalacja
 
-- [Mozilla Firefox](https://addons.mozilla.org/firefox/addon/medium-volcano/)
-- [Opera](https://addons.opera.com/extensions/details/medium-volcano/)
+- [Mozilla Firefox](https://addons.mozilla.org/firefox/addon/average-volcano/)
+- [Opera](https://addons.opera.com/extensions/details/average-volcano/)
 - [Google Chrome](https://chrome.google.com/webstore/detail/%C5%9Bredni-wulkan/oakogdgghkdcianmmiplppcmllelhlbh)
 
 ## Użycie
