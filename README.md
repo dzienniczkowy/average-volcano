@@ -10,7 +10,7 @@
 ## Instalacja
 
 - [Mozilla Firefox](https://addons.mozilla.org/firefox/addon/average-volcano/)
-- [Opera](https://addons.opera.com/extensions/details/average-volcano/)
+- [Opera](https://addons.opera.com/extensions/details/medium-volcano/)
 - [Google Chrome](https://chrome.google.com/webstore/detail/%C5%9Bredni-wulkan/oakogdgghkdcianmmiplppcmllelhlbh)
 
 ## Użycie
