@@ -1,5 +1,4 @@
 const tableDefaultSelector = '.ocenyZwykle-table';
-const tableDefaultSelector = '.ocenyZwykle-table';
 
 function insertAfter(el, referenceNode) {
   referenceNode.parentNode.insertBefore(el, referenceNode.nextSibling);
